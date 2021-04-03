@@ -10,7 +10,7 @@ export function statement(invoice, plays) {
   }).format;
 
   for (let perf of invoice.performances) {
-    let thisAmount = amountFor(playFor(perf), perf);
+    let thisAmount = amountFor(perf);
     // ボリューム特典のポイントを加算
     volumeCredits += Math.max(perf.audience - 30, 0);
     // 喜劇のときは 10人につき、 さらにポイントを加算
@@ -32,7 +32,7 @@ export function statement(invoice, plays) {
     return plays[aPerformance.playID];
   }
 
-  function amountFor(play, aPerformance) {
+  function amountFor(aPerformance) {
     let result = 0;
 
     switch (playFor(aPerformance).type) {
