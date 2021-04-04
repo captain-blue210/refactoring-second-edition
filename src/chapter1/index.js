@@ -9,7 +9,6 @@ export function statement(invoice, plays) {
     } seats)\n`;
     totalAmount += amountFor(perf);
   }
-  let volumeCredits = totalVolumeCredits();
 
   result += `Amount owed is ${usd(totalAmount)}`;
   result += `You earned ${totalVolumeCredits()} credits\n`;
