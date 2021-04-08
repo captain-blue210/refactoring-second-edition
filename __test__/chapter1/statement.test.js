@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, test } from '@jest/globals';
 import fs from 'fs';
-import { statement } from '../../src/chapter1';
+import { statement } from '../../src/chapter1/statement';
 
 describe('execute statement', () => {
   let invoices, plays;
