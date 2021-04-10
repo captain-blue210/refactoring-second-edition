@@ -39,13 +39,9 @@ class PerformanceCalculator {
 
   get amount() {
     let result = 0;
-
     switch (this.play.type) {
       case 'tragedy':
-        result = 40000;
-        if (this.performance.audience > 30) {
-          result += 1000 * (this.performance.audience - 30);
-        }
+        throw '想定外の呼び出し';
         break;
       case 'comedy':
         result = 30000;
@@ -55,7 +51,7 @@ class PerformanceCalculator {
         result += 300 * this.performance.audience;
         break;
       default:
-        throw new Error(`unknown type: ${this.play.type}`);
+        throw new Error(`未知の演劇の種類: ${this.play.type}`);
     }
     return result;
   }
@@ -72,5 +68,24 @@ class PerformanceCalculator {
 }
 
 function createPerformanceCalculator(aPerformance, aPlay) {
-  return new PerformanceCalculator(aPerformance, aPlay);
+  switch (aPlay.type) {
+    case 'tragedy':
+      return new TragedyCalculator(aPerformance, aPlay);
+    case 'comedy':
+      return new ComedyCalculator(aPerformance, aPlay);
+    default:
+      throw new Error(` 未知の演劇の種類 : ${aPlay.type}`);
+  }
 }
+
+class TragedyCalculator extends PerformanceCalculator {
+  get amount() {
+    let result = 40000;
+    if (this.performance.audience > 30) {
+      result += 1000 * (this.performance.audience - 30);
+    }
+    return result;
+  }
+}
+
+class ComedyCalculator extends PerformanceCalculator {}
